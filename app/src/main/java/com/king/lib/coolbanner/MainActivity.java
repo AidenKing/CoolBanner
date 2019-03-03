@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         ItemAdapter adapter = new ItemAdapter();
         adapter.setList(list);
         banner.setAdapter(adapter);
-        // 允许自动轮播
         banner.startAutoPlay();
     }
 
