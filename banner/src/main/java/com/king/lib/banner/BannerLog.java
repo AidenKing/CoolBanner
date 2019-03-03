@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class BannerLog {
 
-    private static boolean isDebug=true;
+    private static boolean isDebug=false;
     /**类名**/
     private static String className;
     /**方法名**/
