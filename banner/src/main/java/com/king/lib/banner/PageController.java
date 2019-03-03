@@ -33,6 +33,26 @@ public class PageController implements ViewPager.OnPageChangeListener {
         banner.addOnPageChangeListener(this);
     }
 
+    /**
+     * 主动设置page时，重置计时
+     * @param realPage 数据源的index
+     */
+    public void setPage(int realPage) {
+        setPageByAdapterIndex(realPage + 1);
+    }
+
+    /**
+     * 主动设置page时，重置计时
+     * @param page 在adapter中的实际index
+     */
+    public void setPageByAdapterIndex(int page) {
+        resetTimer();
+        if (page < banner.getAdapter().getCount()) {
+            banner.setCurrentItem(page, false);
+            banner.scrollBy(1, 1);
+        }
+    }
+
     public void nextPage() {
         int index = banner.getCurrentItem();
         index ++;
@@ -64,7 +84,7 @@ public class PageController implements ViewPager.OnPageChangeListener {
 
     private void indexChange(int index) {
         // 至少两个item才需要循环滚动
-        if (banner.isLoop() && banner.getAdapter().getCount() > 1) {
+        if (isLoop()) {
             if (index == 0) {
                 int changeIndex = banner.getAdapter().getCount() - 2;
                 BannerLog.e("changeIndex=" + changeIndex);
@@ -78,19 +98,25 @@ public class PageController implements ViewPager.OnPageChangeListener {
         }
     }
 
+    private boolean isLoop() {
+        CoolBannerAdapter adapter = (CoolBannerAdapter) banner.getAdapter();
+        // 1个以上支持循环滚动
+        return banner.isLoop() && adapter.getList() != null && adapter.getList().size() > 1;
+    }
+
     public void onAdapterSet() {
         CoolBannerAdapter adapter = (CoolBannerAdapter) banner.getAdapter();
         // 首末位加上循环措施
-        if (banner.isLoop()) {
-            // 1个以上支持循环滚动
-            if (adapter.getList() != null && adapter.getList().size() > 1) {
-                Object first = adapter.getList().get(0);
-                Object last = adapter.getList().get(adapter.getList().size() - 1);
-                adapter.getList().add(0, last);
-                adapter.getList().add(first);
-                adapter.notifyDataSetChanged();
-                banner.setCurrentItem(1);
-            }
+        if (isLoop()) {
+            Object first = adapter.getList().get(0);
+            Object last = adapter.getList().get(adapter.getList().size() - 1);
+            adapter.getList().add(0, last);
+            adapter.getList().add(first);
+            // notifyDataSetChanged经实测在较低性能的设备上会造成刷新滞后于setCurrentItem
+            // 因此会引起setCurrentItem(1)实际定位到了位置2
+//                adapter.notifyDataSetChanged();
+            banner.updateAdapter(adapter);
+            banner.setCurrentItem(1);
         }
     }
 

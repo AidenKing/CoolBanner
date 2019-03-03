@@ -60,10 +60,22 @@ public class CoolBanner extends ViewPager {
         }
     }
 
+    public PageController getController() {
+        return controller;
+    }
+
     @Override
     public void setAdapter(@Nullable PagerAdapter adapter) {
         super.setAdapter(adapter);
         controller.onAdapterSet();
+    }
+
+    /**
+     * 只setAdapter，起notifyDataSetChanged的作用
+     * @param adapter
+     */
+    public void updateAdapter(PagerAdapter adapter) {
+        super.setAdapter(adapter);
     }
 
     public void setLoop(boolean loop) {

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public abstract class CoolBannerAdapter<T> extends PagerAdapter  {
 
-    private List<T> list;
+    protected List<T> list;
 
     public void setList(List<T> list) {
         this.list = list;
@@ -39,6 +39,7 @@ public abstract class CoolBannerAdapter<T> extends PagerAdapter  {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        BannerLog.e("position=" + position);
         View view = LayoutInflater.from(container.getContext()).inflate(getLayoutRes(), null);
         onBindView(view, position, list.get(position));
         container.addView(view);
@@ -47,6 +48,7 @@ public abstract class CoolBannerAdapter<T> extends PagerAdapter  {
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        BannerLog.e("position=" + position);
         container.removeView((View) object);
     }
 

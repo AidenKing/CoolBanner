@@ -25,4 +25,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/btn_set_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Set Page"
+        app:layout_constraintBottom_toBottomOf="@+id/banner"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_page"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:inputType="number"
+        android:text="1"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_set_page"
+        app:layout_constraintStart_toEndOf="@+id/btn_set_page"
+        app:layout_constraintTop_toTopOf="@+id/btn_set_page" />
+
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.king.lib.banner.BannerFlipStyleProvider;
@@ -42,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .show();
+            }
+        });
+
+        findViewById(R.id.btn_set_page).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    int page = Integer.parseInt(((EditText) findViewById(R.id.et_page)).getText().toString());
+                    banner.getController().setPage(page);
+                } catch (Exception e) {}
             }
         });
 
