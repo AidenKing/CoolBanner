@@ -115,7 +115,7 @@ public class PageController implements ViewPager.OnPageChangeListener {
         }
     }
 
-    private boolean isLoop() {
+    public boolean isLoop() {
         CoolBannerAdapter adapter = (CoolBannerAdapter) banner.getAdapter();
         // 1个以上支持循环滚动
         return banner.isLoop() && adapter.getList() != null && adapter.getList().size() > 1;
@@ -194,5 +194,25 @@ public class PageController implements ViewPager.OnPageChangeListener {
 
     public void setOnBannerPageListener(OnBannerPageListener onBannerPageListener) {
         this.onBannerPageListener = onBannerPageListener;
+    }
+
+    public int getCurrentDataPosition() {
+        if (isLoop()) {
+            int index = banner.getCurrentItem();
+            if (index == 0) {
+                int changeIndex = banner.getAdapter().getCount() - 2;
+                return changeIndex - 1;
+            }
+            else if (index == banner.getAdapter().getCount() - 1) {
+                int changeIndex = 1;
+                return changeIndex - 1;
+            }
+            else {
+                return index - 1;
+            }
+        }
+        else {
+            return banner.getCurrentItem();
+        }
     }
 }

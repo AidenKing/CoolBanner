@@ -1,10 +1,10 @@
 package com.king.lib.coolbanner;
 
 import android.content.DialogInterface;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(R.drawable.demo_item7);
         guideView.setPointNumber(list.size());
 //        bannerGuide.setGuideAsTextAtNum(3);
+        guideView.setGuideTextGravity(Gravity.CENTER);
 
         final ItemAdapter adapter = new ItemAdapter();
         adapter.setList(list);

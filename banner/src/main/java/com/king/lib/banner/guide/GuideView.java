@@ -69,7 +69,7 @@ public class GuideView extends View {
             guideNormalColor = a.getColor(R.styleable.GuideView_guideNormalColor, Color.WHITE);
             guideFocusColor = a.getColor(R.styleable.GuideView_guideFocusColor, Color.parseColor("#fe4e4e"));
             guideAsTextAtNum = a.getInteger(R.styleable.GuideView_guideAsTextAtNum, 11);
-            guideTextColor = a.getColor(R.styleable.GuideView_guideAsTextAtNum, Color.WHITE);
+            guideTextColor = a.getColor(R.styleable.GuideView_guideTextColor, Color.WHITE);
             guidePointSize = a.getDimensionPixelSize(R.styleable.GuideView_guidePointSize, dp2px(10));
             guideTextSize = a.getDimensionPixelSize(R.styleable.GuideView_guideTextSize, dp2px(12));
         }

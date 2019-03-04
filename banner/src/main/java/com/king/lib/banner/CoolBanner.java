@@ -159,4 +159,11 @@ public class CoolBanner extends ViewPager {
         return super.dispatchTouchEvent(ev);
     }
 
+    /**
+     * 获取页面index，相对于数据源的（getCurrentItem()在循环情况下是有首位两个占位的）
+     * @return
+     */
+    public int getCurrentDataPosition() {
+        return controller.getCurrentDataPosition();
+    }
 }
