@@ -31,6 +31,8 @@ public class CoolBanner extends ViewPager {
 
     private PageController controller;
 
+    private OnBannerPageListener onBannerPageListener;
+
     public CoolBanner(@NonNull Context context) {
         super(context);
         init(null);
@@ -108,6 +110,11 @@ public class CoolBanner extends ViewPager {
 
     public boolean isEnableSwitch() {
         return enableSwitch;
+    }
+
+    public void setOnBannerPageListener(OnBannerPageListener onBannerPageListener) {
+        this.onBannerPageListener = onBannerPageListener;
+        controller.setOnBannerPageListener(onBannerPageListener);
     }
 
     @Override

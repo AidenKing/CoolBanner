@@ -5,4 +5,13 @@
         <attr name="switchDuration" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="GuideView">
+        <attr name="guideNormalColor" format="color" />
+        <attr name="guideFocusColor" format="color" />
+        <attr name="guideAsTextAtNum" format="integer" />
+        <attr name="guideTextColor" format="color" />
+        <attr name="guidePointSize" format="dimension" />
+        <attr name="guideTextSize" format="dimension" />
+    </declare-styleable>
+
 </resources>

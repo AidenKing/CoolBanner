@@ -28,6 +28,8 @@ public class PageController implements ViewPager.OnPageChangeListener {
 
     private int timeCount;
 
+    private OnBannerPageListener onBannerPageListener;
+
     public PageController(CoolBanner coolBanner) {
         this.banner = coolBanner;
         banner.addOnPageChangeListener(this);
@@ -69,7 +71,6 @@ public class PageController implements ViewPager.OnPageChangeListener {
 
     @Override
     public void onPageSelected(int index) {
-
     }
 
     @Override
@@ -89,11 +90,27 @@ public class PageController implements ViewPager.OnPageChangeListener {
                 int changeIndex = banner.getAdapter().getCount() - 2;
                 BannerLog.e("changeIndex=" + changeIndex);
                 banner.setCurrentItem(changeIndex, false);
+                if (onBannerPageListener != null) {
+                    onBannerPageListener.onSetPage(changeIndex - 1, changeIndex);
+                }
             }
             else if (index == banner.getAdapter().getCount() - 1) {
                 int changeIndex = 1;
                 BannerLog.e("changeIndex=" + changeIndex);
                 banner.setCurrentItem(changeIndex, false);
+                if (onBannerPageListener != null) {
+                    onBannerPageListener.onSetPage(changeIndex - 1, changeIndex);
+                }
+            }
+            else {
+                if (onBannerPageListener != null) {
+                    onBannerPageListener.onSetPage(index - 1, index);
+                }
+            }
+        }
+        else {
+            if (onBannerPageListener != null) {
+                onBannerPageListener.onSetPage(index, index);
             }
         }
     }
@@ -175,4 +192,7 @@ public class PageController implements ViewPager.OnPageChangeListener {
         timeCount = 0;
     }
 
+    public void setOnBannerPageListener(OnBannerPageListener onBannerPageListener) {
+        this.onBannerPageListener = onBannerPageListener;
+    }
 }

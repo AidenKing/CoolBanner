@@ -1,6 +1,7 @@
 package com.king.lib.coolbanner;
 
 import android.content.DialogInterface;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,8 +10,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.king.lib.banner.BannerFlipStyleProvider;
+import com.king.lib.banner.BannerLog;
 import com.king.lib.banner.CoolBanner;
 import com.king.lib.banner.CoolBannerAdapter;
+import com.king.lib.banner.OnBannerPageListener;
+import com.king.lib.banner.guide.GuideView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private CoolBanner banner;
+    private GuideView guideView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         banner = findViewById(R.id.banner);
+        guideView = findViewById(R.id.guide_view);
         BannerFlipStyleProvider.setPagerAnim(banner, 3);
         // 设置非循环
 //        banner.setLoop(false);
@@ -62,10 +68,21 @@ public class MainActivity extends AppCompatActivity {
         list.add(R.drawable.demo_item3);
         list.add(R.drawable.demo_item6);
         list.add(R.drawable.demo_item7);
-        ItemAdapter adapter = new ItemAdapter();
+        guideView.setPointNumber(list.size());
+//        bannerGuide.setGuideAsTextAtNum(3);
+
+        final ItemAdapter adapter = new ItemAdapter();
         adapter.setList(list);
         banner.setAdapter(adapter);
         banner.startAutoPlay();
+
+        banner.setOnBannerPageListener(new OnBannerPageListener() {
+            @Override
+            public void onSetPage(int page, int adapterIndex) {
+                BannerLog.e("page=" + page + ", adapterIndex=" + adapterIndex);
+                guideView.setFocusIndex(page);
+            }
+        });
     }
 
     @Override
