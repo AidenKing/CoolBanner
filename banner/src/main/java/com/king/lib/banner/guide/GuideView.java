@@ -117,7 +117,7 @@ public class GuideView extends View {
     private void drawGuideText(Canvas canvas) {
         mPaint.setColor(guideTextColor);
         mPaint.setTextSize(guideTextSize);
-        String text = mFocusIndex + "/" + pointNumber;
+        String text = (mFocusIndex + 1) + "/" + pointNumber;
         Rect rect = new Rect();
         mPaint.getTextBounds(text, 0, text.length(), rect);
 
